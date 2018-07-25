@@ -1,3 +1,6 @@
+import dotenvVariables from './.env.js';
+
 export const environment = {
-  production: true
+  production: true,
+  ...dotenvVariables,
 };

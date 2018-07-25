@@ -1,7 +1,15 @@
 <mat-toolbar color="primary">
-  <span>{{ title }}</span>
+  <span class="title">{{ title }}</span>
+
+  <a mat-button routerLink="/">Home</a>
+  <a mat-button routerLink="/posts-manager">Posts Manager</a>
+
+  <span class="spacer"></span>
+
+  <button *ngIf="!isAuthenticated" mat-button (click)="login()">Login</button>
+  <button *ngIf="isAuthenticated" mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
 
 <main>
-  <app-home-page></app-home-page>
+  <router-outlet></router-outlet>
 </main>
