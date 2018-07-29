@@ -1,3 +1,71 @@
-<p>
-  posts-manager works!
-</p>
+<h1>Posts Manager</h1>
+<mat-accordion>
+  <mat-expansion-panel
+    *ngFor="let post of sortedPosts"
+    [expanded]="post.open"
+    (opened)="post.open = true"
+    (closed)="post.open = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{post.title || '(new post)'}}</mat-panel-title>
+      <mat-panel-description>
+        {{post.updatedAtString}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form>
+      <div class="input-container">
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="post.title"
+            name="title"
+            placeholder="Title"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Body"
+            required
+            [(ngModel)]="post.body"
+            name="body"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="4"
+            cdkAutosizeMaxRows="10"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <mat-action-row>
+        <button
+          mat-button
+          color="primary"
+          [disabled]="post.loading || !post.isDirty"
+          (click)="post.save()"
+        >
+          <span *ngIf="post.loading">Saving...</span>
+          <span *ngIf="!post.loading">Save</span>
+        </button>
+        <button
+          mat-button
+          type="button"
+          [disabled]="post.loading || !post.isDirty"
+          (click)="post.reset()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-button
+          color="warn"
+          [disabled]="post.loading"
+          (click)="post.delete()"
+        >
+          Delete
+        </button>
+      </mat-action-row>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<button mat-fab class="add-button" (click)="addPost()" [disabled]="newIsOpen">
+  <mat-icon aria-label="Create new post">add</mat-icon>
+</button>

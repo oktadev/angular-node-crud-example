@@ -2,9 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   MatToolbarModule,
   MatButtonModule,
+  MatIconModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
 } from '@angular/material';
 import { OktaAuthModule, OktaCallbackComponent } from '@okta/okta-angular';
 
@@ -46,8 +51,14 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
 
+    FormsModule,
+
     MatToolbarModule,
     MatButtonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
 
     RouterModule.forRoot(appRoutes),
     OktaAuthModule.initAuth(oktaConfig),

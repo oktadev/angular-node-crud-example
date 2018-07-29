@@ -1,0 +1,10 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+}
