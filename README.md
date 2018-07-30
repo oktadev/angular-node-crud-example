@@ -1,27 +1,69 @@
-# OktaNodeAngularExample
+# Basic CRUD App with Node + Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+This example app shows how to create a Node.js API and display its data with an Angular UI.
 
-## Development server
+This project was bootstrapped with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Prerequisites**: [Node.js](https://nodejs.org/en/).
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To install this example application, run the following commands:
 
-## Build
+```bash
+git clone git@github.com:oktadeveloper/angular-node-crud-example.git
+cd angular-node-crud-example
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This will get a copy of the project install locally. You will need to set up some environment variables before the app will run properly.
 
-## Running unit tests
+To integrate Okta's Identity Platform for user authentication, you'll first need to:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* [Sign up for a free Okta Developer account](https://www.okta.com/developer/signup/)
+* You will get a URL similar to `https://dev-123456.oktapreview.com`.
+  * Save this URL for later
+  * You will also use this URL to login to your Okta account
 
-## Running end-to-end tests
+You will need to create an application in Okta:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+* Log in to your Okta account, then navigate to **Applications** and click the **Add Application** button
+* Select **Single-Page App** and click **Next**
+* Give your application a name (e.g. "My Angular App")
+* Change the **Base URI** to `http://localhost:4200/` and the **Login redirect URI** to `http://localhost:4200/implicit/callback`, then click **Done**
+* Save your **Client ID** for later
 
-## Further help
+Your Okta application should have settings similar to the following:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+![Okta Application Settings](images/okta-app-settings.png)
+
+Now create a file called `.env.js` in the `src/environments` folder of the project, then export the following variables, replacing the values with your own from the previous steps.
+
+
+**.env.local**
+```javascript
+module.exports = {
+  oktaOrgURL: 'https://{yourOktaOrgUrl}',
+  oktaClientId: '{yourClientId}',
+};
+```
+
+Now you can run both the Node API server and the Angular frontend with the same command:
+
+```bash
+npm start
+```
+
+## Links
+
+This example uses the following libraries provided by Okta:
+
+* [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier)
+* [Okta Angular SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular)
+
+## Help
+
+Please [raise an issue](https://github.com/oktadeveloper/angular-node-crud-example/issues) if you find a problem with the example application, or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email [developers@okta.com](mailto:developers@okta.com) if would like to create a support ticket.
+
+## License
+
+Apache 2.0, see [LICENSE](LICENSE).
