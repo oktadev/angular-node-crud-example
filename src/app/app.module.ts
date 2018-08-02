@@ -11,10 +11,9 @@ import {
   MatFormFieldModule,
   MatInputModule,
 } from '@angular/material';
-import { OktaAuthModule, OktaCallbackComponent } from '@okta/okta-angular';
+import { OktaAuthModule, OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
 
 import { environment } from '../environments/environment';
-import { AuthGuard } from './auth.guard';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PostsManagerComponent } from './posts-manager/posts-manager.component';
@@ -33,7 +32,7 @@ const appRoutes: Routes = [
   {
     path: 'posts-manager',
     component: PostsManagerComponent,
-    canActivate: [AuthGuard],
+    canActivate: [OktaAuthGuard],
   },
   {
     path: 'implicit/callback',
@@ -63,7 +62,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     OktaAuthModule.initAuth(oktaConfig),
   ],
-  providers: [AuthGuard],
+  providers: [OktaAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
